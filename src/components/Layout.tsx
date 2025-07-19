@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { 
-  LayoutDashboard, 
-  Receipt, 
-  PieChart, 
-  Target, 
-  Menu, 
+import {
+  LayoutDashboard,
+  Receipt,
+  PieChart,
+  Target,
+  Menu,
   X,
   DollarSign
 } from 'lucide-react';
@@ -24,26 +24,28 @@ export function Layout() {
 
   return (
     <div className="min-h-screen bg-gradient-dashboard">
-      {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
-      <div className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 bg-card shadow-floating transform transition-transform duration-300 ease-in-out",
-        "lg:translate-x-0 lg:static lg:inset-0 lg:w-64 xl:w-72",
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
+      <div
+        className={cn(
+          "fixed inset-y-0 left-0 z-30 w-64 bg-card shadow-floating transform transition-transform duration-300 ease-in-out",
+          "lg:translate-x-0 lg:static lg:inset-0 lg:w-64 xl:w-72",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
         <div className="flex items-center justify-between h-16 px-4 lg:px-6 border-b border-border">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
               <DollarSign className="w-4 h-4 lg:w-5 lg:h-5 text-primary-foreground" />
             </div>
-            <span className="text-lg lg:text-xl font-semibold text-foreground">FinanceFlow</span>
+            <span className="text-lg lg:text-xl font-semibold text-foreground">
+              FinanceFlow
+            </span>
           </div>
           <Button
             variant="ghost"
@@ -55,7 +57,7 @@ export function Layout() {
           </Button>
         </div>
 
-        <nav className="mt-6 px-3 lg:px-4">
+        <nav className="mt-16 px-3 lg:px-4">
           <div className="space-y-1">
             {navigation.map((item) => (
               <NavLink
@@ -80,10 +82,8 @@ export function Layout() {
         </nav>
       </div>
 
-      {/* Main content */}
       <div className="lg:pl-64 xl:pl-72">
-        {/* Top bar */}
-        <div className="sticky top-0 z-30 bg-card/95 backdrop-blur-sm border-b border-border">
+        <div className="sticky top-0 z-40 bg-card/95 backdrop-blur-sm border-b border-border">
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             <Button
               variant="ghost"
@@ -93,7 +93,7 @@ export function Layout() {
             >
               <Menu className="w-5 h-5" />
             </Button>
-            
+
             <div className="flex items-center gap-4">
               <div className="text-sm lg:text-base text-muted-foreground hidden sm:block">
                 Welcome back! Track your financial journey.
@@ -102,7 +102,7 @@ export function Layout() {
           </div>
         </div>
 
-        {/* Page content */}
+
         <main className="p-4 sm:p-6 lg:p-8 xl:p-10 max-w-7xl mx-auto">
           <Outlet />
         </main>
