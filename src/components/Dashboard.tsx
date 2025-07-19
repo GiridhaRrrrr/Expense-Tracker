@@ -168,17 +168,17 @@ export function Dashboard() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-        <p className="text-muted-foreground">
+      <div className="text-center lg:text-left">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">Dashboard</h1>
+        <p className="text-sm sm:text-base text-muted-foreground mt-2">
           Overview of your financial activity for {format(currentDate, 'MMMM yyyy')}
         </p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
         <StatCard
           title="Total Income"
           value={formatCurrency(currentMonthIncome)}
@@ -250,14 +250,14 @@ export function Dashboard() {
       )}
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
         {/* Monthly Trend */}
         <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle>6-Month Trend</CardTitle>
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg lg:text-xl">6-Month Trend</CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="pt-0">
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={monthlyData}>
                 <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
                 <XAxis dataKey="month" />
@@ -280,12 +280,12 @@ export function Dashboard() {
 
         {/* Category Breakdown */}
         <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle>Spending by Category</CardTitle>
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg lg:text-xl">Spending by Category</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-0">
             {categoryData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
                   <Pie
                     data={categoryData}
@@ -310,7 +310,7 @@ export function Dashboard() {
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+              <div className="h-[350px] flex items-center justify-center text-muted-foreground">
                 <div className="text-center">
                   <Target className="h-12 w-12 mx-auto mb-4 opacity-50" />
                   <p>No expenses this month</p>
@@ -323,22 +323,22 @@ export function Dashboard() {
 
       {/* Recent Transactions */}
       <Card className="shadow-card">
-        <CardHeader>
-          <CardTitle>Recent Transactions</CardTitle>
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg lg:text-xl">Recent Transactions</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           {recentTransactions.length > 0 ? (
             <div className="space-y-3">
               {recentTransactions.map((transaction) => (
-                <div key={transaction.id} className="flex items-center justify-between p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors">
-                  <div className="flex-1">
-                    <p className="font-medium">{transaction.description}</p>
-                    <p className="text-sm text-muted-foreground">
+                <div key={transaction.id} className="flex items-center justify-between p-3 lg:p-4 rounded-lg border border-border hover:bg-muted/50 transition-colors">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm lg:text-base truncate">{transaction.description}</p>
+                    <p className="text-xs lg:text-sm text-muted-foreground">
                       {transaction.category} • {format(parseISO(transaction.date), 'MMM dd, yyyy')}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <p className={`font-bold ${transaction.type === 'income' ? 'text-success' : 'text-destructive'}`}>
+                  <div className="text-right ml-4">
+                    <p className={`font-bold text-sm lg:text-base ${transaction.type === 'income' ? 'text-success' : 'text-destructive'}`}>
                       {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
                     </p>
                   </div>

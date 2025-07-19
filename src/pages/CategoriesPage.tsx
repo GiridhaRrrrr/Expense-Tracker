@@ -103,17 +103,17 @@ export default function CategoriesPage() {
   const totalIncome = incomeAnalysis.reduce((sum, cat) => sum + cat.amount, 0);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-foreground">Categories</h1>
-        <p className="text-muted-foreground">
+      <div className="text-center lg:text-left">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">Categories</h1>
+        <p className="text-sm sm:text-base text-muted-foreground mt-2">
           Analysis of your spending and income by category for {format(currentDate, 'MMMM yyyy')}
         </p>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         <Card className="shadow-card">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -164,7 +164,7 @@ export default function CategoriesPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
         {/* Expense Categories Pie Chart */}
         <Card className="shadow-card">
           <CardHeader>
@@ -172,7 +172,7 @@ export default function CategoriesPage() {
           </CardHeader>
           <CardContent>
             {categoryAnalysis.length > 0 ? (
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
                   <Pie
                     data={categoryAnalysis}
@@ -197,7 +197,7 @@ export default function CategoriesPage() {
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+              <div className="h-[350px] flex items-center justify-center text-muted-foreground">
                 No expense data available
               </div>
             )}
@@ -211,7 +211,7 @@ export default function CategoriesPage() {
           </CardHeader>
           <CardContent>
             {categoryAnalysis.length > 0 ? (
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={350}>
                 <BarChart data={categoryAnalysis.slice(0, 6)} layout="horizontal">
                   <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
                   <XAxis type="number" tickFormatter={(value) => `$${value}`} />
@@ -228,7 +228,7 @@ export default function CategoriesPage() {
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+              <div className="h-[350px] flex items-center justify-center text-muted-foreground">
                 No expense data available
               </div>
             )}
@@ -237,7 +237,7 @@ export default function CategoriesPage() {
       </div>
 
       {/* Detailed Category Lists */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
         {/* Expense Categories Detail */}
         <Card className="shadow-card">
           <CardHeader>

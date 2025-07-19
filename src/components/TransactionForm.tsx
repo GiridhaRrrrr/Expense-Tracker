@@ -96,8 +96,8 @@ export function TransactionForm({ transaction, onSubmit, onCancel }: Transaction
 
   return (
     <Card className="shadow-card">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+      <CardHeader className="pb-4">
+        <CardTitle className="flex items-center gap-2 text-lg lg:text-xl">
           {transaction ? 'Edit Transaction' : 'Add New Transaction'}
           <Badge variant={selectedType === 'income' ? 'default' : 'secondary'} className="ml-2">
             {selectedType === 'income' ? (
@@ -109,10 +109,10 @@ export function TransactionForm({ transaction, onSubmit, onCancel }: Transaction
           </Badge>
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
               <FormField
                 control={form.control}
                 name="type"
@@ -191,7 +191,7 @@ export function TransactionForm({ transaction, onSubmit, onCancel }: Transaction
               )}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
               <FormField
                 control={form.control}
                 name="date"
@@ -268,16 +268,16 @@ export function TransactionForm({ transaction, onSubmit, onCancel }: Transaction
               />
             </div>
 
-            <div className="flex gap-3 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
               <Button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="flex-1"
+                className="flex-1 h-11"
               >
                 {isSubmitting ? 'Saving...' : (transaction ? 'Update Transaction' : 'Add Transaction')}
               </Button>
               {onCancel && (
-                <Button type="button" variant="outline" onClick={onCancel}>
+                <Button type="button" variant="outline" onClick={onCancel} className="h-11">
                   Cancel
                 </Button>
               )}

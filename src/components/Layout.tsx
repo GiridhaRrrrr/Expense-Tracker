@@ -34,15 +34,16 @@ export function Layout() {
 
       {/* Sidebar */}
       <div className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 bg-card shadow-floating transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
+        "fixed inset-y-0 left-0 z-50 w-64 bg-card shadow-floating transform transition-transform duration-300 ease-in-out",
+        "lg:translate-x-0 lg:static lg:inset-0 lg:w-64 xl:w-72",
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-border">
+        <div className="flex items-center justify-between h-16 px-4 lg:px-6 border-b border-border">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <DollarSign className="w-5 h-5 text-primary-foreground" />
+            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <DollarSign className="w-4 h-4 lg:w-5 lg:h-5 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold text-foreground">FinanceFlow</span>
+            <span className="text-lg lg:text-xl font-semibold text-foreground">FinanceFlow</span>
           </div>
           <Button
             variant="ghost"
@@ -54,7 +55,7 @@ export function Layout() {
           </Button>
         </div>
 
-        <nav className="mt-6 px-3">
+        <nav className="mt-6 px-3 lg:px-4">
           <div className="space-y-1">
             {navigation.map((item) => (
               <NavLink
@@ -63,7 +64,7 @@ export function Layout() {
                 end={item.href === '/'}
                 className={({ isActive }) =>
                   cn(
-                    "group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                    "group flex items-center px-3 py-2.5 lg:py-3 text-sm lg:text-base font-medium rounded-lg transition-all duration-200",
                     isActive
                       ? "bg-gradient-primary text-primary-foreground shadow-elevated"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -71,7 +72,7 @@ export function Layout() {
                 }
                 onClick={() => setSidebarOpen(false)}
               >
-                <item.icon className="mr-3 h-5 w-5 flex-shrink-0" />
+                <item.icon className="mr-3 h-5 w-5 lg:h-6 lg:w-6 flex-shrink-0" />
                 {item.name}
               </NavLink>
             ))}
@@ -80,21 +81,21 @@ export function Layout() {
       </div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className="lg:pl-64 xl:pl-72">
         {/* Top bar */}
         <div className="sticky top-0 z-30 bg-card/95 backdrop-blur-sm border-b border-border">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setSidebarOpen(true)}
               className="lg:hidden"
             >
-              <Menu className="w-4 h-4" />
+              <Menu className="w-5 h-5" />
             </Button>
             
             <div className="flex items-center gap-4">
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm lg:text-base text-muted-foreground hidden sm:block">
                 Welcome back! Track your financial journey.
               </div>
             </div>
@@ -102,7 +103,7 @@ export function Layout() {
         </div>
 
         {/* Page content */}
-        <main className="p-4 sm:p-6">
+        <main className="p-4 sm:p-6 lg:p-8 xl:p-10 max-w-7xl mx-auto">
           <Outlet />
         </main>
       </div>

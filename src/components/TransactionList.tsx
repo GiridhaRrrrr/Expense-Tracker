@@ -81,19 +81,19 @@ export function TransactionList() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8">
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         <Card className="shadow-card bg-gradient-success border-success/20">
-          <CardContent className="p-4">
+          <CardContent className="p-4 lg:p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-success-foreground/80">Total Income</p>
-                <p className="text-2xl font-bold text-success-foreground">
+                <p className="text-xl lg:text-2xl font-bold text-success-foreground">
                   {formatCurrency(getIncomeTotal())}
                 </p>
               </div>
-              <div className="p-2 bg-success-foreground/10 rounded-lg">
+              <div className="p-2 lg:p-3 bg-success-foreground/10 rounded-lg">
                 <Plus className="h-5 w-5 text-success-foreground" />
               </div>
             </div>
@@ -101,15 +101,15 @@ export function TransactionList() {
         </Card>
 
         <Card className="shadow-card border-destructive/20">
-          <CardContent className="p-4">
+          <CardContent className="p-4 lg:p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total Expenses</p>
-                <p className="text-2xl font-bold text-destructive">
+                <p className="text-xl lg:text-2xl font-bold text-destructive">
                   {formatCurrency(getExpenseTotal())}
                 </p>
               </div>
-              <div className="p-2 bg-destructive/10 rounded-lg">
+              <div className="p-2 lg:p-3 bg-destructive/10 rounded-lg">
                 <Minus className="h-5 w-5 text-destructive" />
               </div>
             </div>
@@ -117,15 +117,15 @@ export function TransactionList() {
         </Card>
 
         <Card className="shadow-card bg-gradient-primary border-primary/20">
-          <CardContent className="p-4">
+          <CardContent className="p-4 lg:p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-primary-foreground/80">Net Total</p>
-                <p className="text-2xl font-bold text-primary-foreground">
+                <p className="text-xl lg:text-2xl font-bold text-primary-foreground">
                   {formatCurrency(getTotalAmount())}
                 </p>
               </div>
-              <div className="p-2 bg-primary-foreground/10 rounded-lg">
+              <div className="p-2 lg:p-3 bg-primary-foreground/10 rounded-lg">
                 <DollarSign className="h-5 w-5 text-primary-foreground" />
               </div>
             </div>
@@ -135,13 +135,13 @@ export function TransactionList() {
 
       {/* Filters and Search */}
       <Card className="shadow-card">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-lg lg:text-xl">
             <Filter className="h-5 w-5" />
             Filters & Search
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -154,7 +154,7 @@ export function TransactionList() {
             </div>
             
             <Select value={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger className="w-full sm:w-[150px]">
+              <SelectTrigger className="w-full sm:w-[160px] lg:w-[180px]">
                 <SelectValue placeholder="All Types" />
               </SelectTrigger>
               <SelectContent>
@@ -165,7 +165,7 @@ export function TransactionList() {
             </Select>
 
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectTrigger className="w-full sm:w-[200px] lg:w-[220px]">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
@@ -183,12 +183,12 @@ export function TransactionList() {
 
       {/* Transaction Table */}
       <Card className="shadow-card">
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center justify-between text-lg lg:text-xl">
             <span>Recent Transactions ({sortedTransactions.length})</span>
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           {sortedTransactions.length === 0 ? (
             <div className="text-center py-12">
               <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
