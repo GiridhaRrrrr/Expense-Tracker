@@ -17,8 +17,8 @@ export function TransactionList() {
   const { state, deleteTransaction } = useFinance();
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedType, setSelectedType] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedType, setSelectedType] = useState('all');
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
@@ -26,8 +26,8 @@ export function TransactionList() {
   const filteredTransactions = state.transactions.filter(transaction => {
     const matchesSearch = transaction.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          transaction.category.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = !selectedCategory || transaction.category === selectedCategory;
-    const matchesType = !selectedType || transaction.type === selectedType;
+    const matchesCategory = selectedCategory === 'all' || !selectedCategory || transaction.category === selectedCategory;
+    const matchesType = selectedType === 'all' || !selectedType || transaction.type === selectedType;
     
     return matchesSearch && matchesCategory && matchesType;
   });
@@ -158,7 +158,7 @@ export function TransactionList() {
                 <SelectValue placeholder="All Types" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Types</SelectItem>
+                <SelectItem value="all">All Types</SelectItem>
                 <SelectItem value="income">Income</SelectItem>
                 <SelectItem value="expense">Expense</SelectItem>
               </SelectContent>
@@ -169,7 +169,7 @@ export function TransactionList() {
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Categories</SelectItem>
+                <SelectItem value="all">All Categories</SelectItem>
                 {state.categories.map((category) => (
                   <SelectItem key={category.id} value={category.name}>
                     {category.name}
@@ -194,7 +194,7 @@ export function TransactionList() {
               <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-medium text-foreground mb-2">No transactions found</h3>
               <p className="text-muted-foreground mb-4">
-                {searchTerm || selectedCategory || selectedType 
+                {searchTerm || (selectedCategory && selectedCategory !== 'all') || (selectedType && selectedType !== 'all')
                   ? 'Try adjusting your filters to see more results.'
                   : 'Start tracking your finances by adding your first transaction.'
                 }
